@@ -6,7 +6,7 @@ class EmailInput extends FormzInput<String, EmailValidationError> {
   const EmailInput.pure() : super.pure('');
   const EmailInput.dirty([super.value = '']) : super.dirty();
   static final _emailRegExp = RegExp(
-    r'^[a-zA-Z\d.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z\d-]+(?:\.[a-zA-Z\d-]+)*$',
+    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
   );
   @override
   EmailValidationError? validator(String value) {
