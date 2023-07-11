@@ -34,7 +34,7 @@ class _WorkerCreateView extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text('Worker created with id ${state.createData?.id}')),
+              const SnackBar(content: Text('Worker created successfully')),
             );
           context.go(NavigationService.staffList);
         }
@@ -47,22 +47,27 @@ class _WorkerCreateView extends StatelessWidget {
           return const Center(child: CupertinoActivityIndicator());
         }
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            WorkerFormView(
-              data: state.createData,
-              isReadonly: false,
-              formUpdated: (updatedData) {
-                context.read<WorkerCreateBloc>().add(WorkerCreateUpdatedDataEvent(
-                      data: updatedData.data,
-                      isValid: updatedData.isValid,
-                    ));
-              },
-            ),
-            Center(child: _SaveButton())
-          ],
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Adding new employee'),
+          ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              WorkerFormView(
+                data: state.createData,
+                isReadonly: false,
+                formUpdated: (updatedData) {
+                  context.read<WorkerCreateBloc>().add(WorkerCreateUpdatedDataEvent(
+                        data: updatedData.data,
+                        isValid: updatedData.isValid,
+                      ));
+                },
+              ),
+              Center(child: _SaveButton())
+            ],
+          ),
         );
       },
     );

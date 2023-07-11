@@ -42,6 +42,7 @@ class WorkerCreateBloc extends HydratedBloc<WorkerCreateEvent, WorkerCreateState
       emit(state.copyWith(createStatus: CreateWorkerStatus.inProgress));
       final created = await _staffRepository.saveWorker(state.createData!);
       emit(state.copyWith(createStatus: CreateWorkerStatus.success, createData: created));
+      await clear();
     } catch (_) {
       log('Error', error: _);
       emit(state.copyWith(createStatus: CreateWorkerStatus.failure));

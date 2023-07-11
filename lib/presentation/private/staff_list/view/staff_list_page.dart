@@ -56,7 +56,7 @@ class _StaffListView extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
                   onPressed: () => context.go(NavigationService.staffCreate),
-                  child: const Text('Create')),
+                  child: const Text('Add new')),
             ),
             const _StaffListContent(),
           ],
@@ -89,7 +89,7 @@ class _StaffListContent extends StatelessWidget {
             return Center(
               child: Text(
                 'Worker list is empty!',
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             );
           }

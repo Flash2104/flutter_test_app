@@ -50,27 +50,51 @@ class _WorkerEditView extends StatelessWidget {
           return const Center(child: CupertinoActivityIndicator());
         }
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child:
-                  Text('Editing: ${state.editData!.name}  ${state.editData!.familyname}'),
+        return Scaffold(
+            appBar: AppBar(
+              title: Text('Editing of employee: ${state.editData!.id}'),
             ),
-            WorkerFormView(
-              data: state.editData,
-              isReadonly: false,
-              formUpdated: (updatedData) {
-                context.read<WorkerEditBloc>().add(WorkerEditUpdatedDataEvent(
-                      data: updatedData.data,
-                      isValid: updatedData.isValid,
-                    ));
-              },
-            ),
-            Center(child: _SaveButton())
-          ],
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                WorkerFormView(
+                  data: state.editData,
+                  isReadonly: false,
+                  formUpdated: (updatedData) {
+                    context.read<WorkerEditBloc>().add(WorkerEditUpdatedDataEvent(
+                          data: updatedData.data,
+                          isValid: updatedData.isValid,
+                        ));
+                  },
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  _CancelButton(),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  _SaveButton()
+                ])
+              ],
+            ));
+      },
+    );
+  }
+}
+
+class _CancelButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<WorkerEditBloc, WorkerEditState>(
+      builder: (context, state) {
+        return OutlinedButton(
+          key: const Key('workerEditForm_cancel_button'),
+          onPressed: state.isValid
+              ? () {
+                  context.go(NavigationService.staffList);
+                }
+              : null,
+          child: const Text('Cancel'),
         );
       },
     );
@@ -82,7 +106,7 @@ class _SaveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<WorkerEditBloc, WorkerEditState>(
       builder: (context, state) {
-        return OutlinedButton(
+        return ElevatedButton(
           key: const Key('workerEditForm_submit_button'),
           onPressed: state.isValid
               ? () {

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:formz/formz.dart';
 import 'package:intl/intl.dart';
 
@@ -15,8 +13,7 @@ class DateInput extends FormzInput<String, DateValidationError> {
   DateValidationError? validator(String value) {
     if (value.isEmpty) return DateValidationError.empty;
     try {
-      final parsed = DATE_FORMAT.parse(value);
-      log('$parsed');
+      DATE_FORMAT.parse(value);
       return null;
     } catch (e) {
       return DateValidationError.invalid;

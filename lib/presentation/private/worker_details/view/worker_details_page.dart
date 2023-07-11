@@ -51,25 +51,29 @@ class _WorkerDetailsView extends StatelessWidget {
           return const Center(child: CupertinoActivityIndicator());
         }
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            WorkerFormView(
-              data: state.workerData,
-              isReadonly: true,
-              formUpdated: null,
+        return Scaffold(
+            appBar: AppBar(
+              title: const Text('Employee details'),
             ),
-            Container(
-                margin: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    _EditButton(),
-                  ],
-                ))
-          ],
-        );
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                WorkerFormView(
+                  data: state.workerData,
+                  isReadonly: true,
+                  formUpdated: null,
+                ),
+                Container(
+                    margin: const EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        _EditButton(),
+                      ],
+                    ))
+              ],
+            ));
       },
     );
   }

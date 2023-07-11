@@ -44,10 +44,10 @@ class _HomeScreenView extends StatelessWidget {
           }
         },
         child: Scaffold(
-          appBar: AppBar(title: const Text('Employees list'), actions: [
+          appBar: AppBar(title: const Text('Employees list App'), actions: [
             ElevatedButton(
                 onPressed: () => context.go(NavigationService.staffList),
-                child: const Text('Staff')),
+                child: const Text('Home')),
             const SizedBox(
               width: 20,
             ),
